@@ -8,7 +8,7 @@ export class UserService {
   node_url: string;
   constructor(private http: Http) {
     this.api_url = 'https://www.easy-mock.com/mock/595af9579adc231f357033a7/niceFish/user';
-    this.node_url = 'api/users';
+    this.node_url = '/api/users';
   }
 
   findUser(userNameOrId: any): Promise<User> {
@@ -32,6 +32,14 @@ export class UserService {
           const users = data.data;
           return users;
         }
+      });
+  }
+
+  registerUser(user: User): Promise<User> {
+    return this.http.post(`${this.node_url}`, JSON.stringify(user))
+      .toPromise()
+      .then(() => {
+        return user as User;
       });
   }
 }

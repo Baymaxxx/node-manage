@@ -1,13 +1,14 @@
 import { AuthleaveComponent } from './components/authleave/authleave.component';
 import { RouterModule } from '@angular/router';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectStatusPipe } from './pipes/project-status.pipe';
 import { SidebarComponent } from '../layout/sidebar/sidebar.component';
 import { UserLogoutComponent } from '../routes/user/user-logout/user-logout.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UserHeadComponent } from './components/user-head/user-head.component';
 
 const APP_MODULE = [
   CommonModule,
@@ -16,19 +17,24 @@ const APP_MODULE = [
   RouterModule,
   HttpClientModule
 ];
+const Componments = [
+  SidebarComponent,
+  UserLogoutComponent,
+  ProjectStatusPipe,
+  AuthleaveComponent,
+  UserHeadComponent
+];
+
 @NgModule({
   imports: [
     ...APP_MODULE,
     NgZorroAntdModule.forRoot()
   ],
-  declarations: [SidebarComponent, UserLogoutComponent, ProjectStatusPipe, AuthleaveComponent],
+  declarations: [...Componments],
   exports: [
-    ...APP_MODULE,
-    SidebarComponent,
-    UserLogoutComponent,
     NgZorroAntdModule,
-    ProjectStatusPipe,
-    AuthleaveComponent
+    ...APP_MODULE,
+    ...Componments
   ]
 })
 export class SharedModule { }

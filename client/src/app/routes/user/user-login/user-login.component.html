@@ -1,4 +1,5 @@
 <div class="all-page">
+  <app-user-head></app-user-head>
   <form nz-form [formGroup]="validateForm" class="login-form center-block" (ngSubmit)="_submitForm()">
     <div nz-form-item>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.userName">

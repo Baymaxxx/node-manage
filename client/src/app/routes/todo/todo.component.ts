@@ -38,10 +38,10 @@ export class TodoComponent implements OnInit {
   }
   addTodo(): void {
     this.todoService.addTodo(this.desc)
-      .then(todos => {
-        console.log(todos);
+      .then(todo => {
+        console.log(todo);
 
-        this.todos.push(todos);
+        this.todos.push(todo);
         this.desc = '';
       });
   }

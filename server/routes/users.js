@@ -25,7 +25,7 @@ router
       }
       ctx.response.body = {
         code: 200,
-        msg: '新增成功',
+        msg: '注册成功',
         data: docs
       }
     })
@@ -46,6 +46,7 @@ router
     })
   })
   .post('/users', async (ctx, next) => {
+    console.log(ctx);
     await new Promise((resolve, reject) => {
       DB.Users.update({
         id: request.body.id
