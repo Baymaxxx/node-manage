@@ -1,0 +1,13 @@
+.layout{
+    background: #fff;
+}
+.sidebar{
+    display: flex;
+}
+.content{
+    padding: 20px;
+    min-height: 100vh ;
+}
+.ant-layout {
+    flex-direction:unset;
+}

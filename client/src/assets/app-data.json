@@ -1,0 +1,35 @@
+{
+    "app": {
+        "name": "joy",
+        "description": "Ng-zorro admin panel front-end framework"
+    },
+    "user": {
+        "id": 1,
+        "name": "Admin",
+        "password": "1234",
+        "avatar": "./assets/img/zorro.svg",
+        "email": "81243232@qq.com"
+    },
+    "menu": [
+        {
+            "text": "项目一览",
+            "link": "/view",
+            "icon": "anticon-database"
+        },
+        { 
+            "text": "项目配置",
+            "link": "/config",
+            "icon": "anticon-edit"
+        },
+        {
+            "text":"项目图表",
+            "link": "/monitor",
+            "icon": "anticon-area-chart"
+        },
+        {
+            "text":"项目表格",
+            "link": "/table",
+            "icon": "anticon-laptop"
+        }
+    ]
+}

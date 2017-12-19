@@ -1,0 +1,66 @@
+@import '../../../assets/styles/core/_variables';
+
+.header{
+    width: 100%;
+    height: 64px;
+    background-color: $defaulteColor;
+    user-select: none;
+    .nav-control{
+        margin: 10px -33px 0 40px;
+        color: #fff;
+        font-size: 28px;
+        cursor: pointer;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        line-height: 40px;
+        &:hover{
+            background-color: hsla(0,0%,100%,.2)!important;
+        }
+    }
+    .logo{
+        margin-left: 80px;
+        width: 100px;
+        line-height: 64px;
+        img{
+            width: 80%;
+        }
+    }
+    .nav{
+        position: relative;
+        z-index: 1;
+        margin-left: 20px;
+        li{
+            width: 80px;
+            line-height: 64px;
+            color: #fff;
+            background-color: $defaulteColor;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            &.active,&:hover{
+                color: $defaulteColor;
+                background-color: #fff;
+            }
+        }
+    }
+    .exam-title{
+        position: absolute;
+        left: 50%;
+        margin-left: -25%;
+        width: 50%;
+        line-height: 64px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+    }
+    .userinfo{
+        margin-right: 50px;
+        line-height: 64px;
+        .username{
+            margin-right: 20px;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+}
