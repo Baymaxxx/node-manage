@@ -12,10 +12,10 @@ export class UserService {
   }
 
   findUser(userNameOrId: any): Promise<User> {
-    return this.http.get(`${this.api_url}`)
+    return this.http.get(`${this.node_url}`)
       .toPromise()
       .then((res) => {
-        let users = res.json().users as User[];
+        let users = res.json().data as User[];
         users = users.filter(item => {
           return item.username === userNameOrId || item.id === userNameOrId;
         });
@@ -36,9 +36,11 @@ export class UserService {
   }
 
   registerUser(user: User): Promise<User> {
-    return this.http.post(`${this.node_url}`, JSON.stringify(user))
+    console.log(1);
+    return this.http.put(`${this.node_url}`, JSON.stringify(user))
       .toPromise()
-      .then(() => {
+      .then((res) => {
+        console.log(res);
         return user as User;
       });
   }

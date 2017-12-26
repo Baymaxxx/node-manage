@@ -7,16 +7,9 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/app.js"
+            "name": "启动程序",
+            "program": "${workspaceFolder}\\server\\bin\\www",
+            "cwd": "${workspaceRoot}"
         },
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "sourceMaps": true,
-            "url": "http://localhost:4200",
-            "webRoot": "${workspaceRoot}"
-        }
     ]
 }

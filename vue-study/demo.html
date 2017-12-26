@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-bind:title="message">
+        <div :class="seen? 'active':'noActive'">look</div>
+        {{ message }} --- {{fullName}}
+        <input type="text" v-model="message" :class="[message, fullName]">
+        <button v-on:click="reverseMessage">翻转</button>
+        <p v-if="seen">现在你看到我了</p>
+        <p :if="seen">{{reverseMessageC}}</p>
+        <p :if="seen">{{now}}</p>
+        <ul>
+            <li v-for="item in todos" v-html="item.text"></li>
+        </ul>
+        <ol>
+            <todo-item v-for="item in todos" v-bind:todo="item" v-bind:key="item.text"></todo-item>
+        </ol>
+        <p>
+            Ask a yes/no question:
+            <input v-model="question">
+        </p>
+        <p>{{ answer }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        Vue.component('todo-item', {
+            template: '<li>{{todo.text}}</li>',
+            props: ['todo']
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'hello vue!',
+                seen: true,
+                todos: [{
+                    text: 'a'
+                }, {
+                    text: '<button>111</button>'
+                }],
+                a: 1,
+                firstName: 'Foo',
+                lastName: 'Bar',
+                fullName: 'Foo Bar',
+                question: '',
+                answer: 'I cannot give you an answer until you ask a question!'
+            },
+            computed: {
+                reverseMessageC: function () {
+                    return this.message.split('').reverse().join('');
+                },
+                now: function () {
+                    return Date.now();
+                }
+            },
+            methods: {
+                reverseMessage: function () {
+                    this.message = this.message.split('').reverse().join('');
+                    this.seen = !this.seen;
+                },
+                getAnswer: _.debounce(
+                    function () {
+                        if (this.question.indexOf('?') === -1) {
+                            this.answer = 'Questions usually contain a question mark. ;-)'
+                            return
+                        }
+                        this.answer = 'Thinking...'
+                        var vm = this
+                        axios.get('https://yesno.wtf/api')
+                            .then(function (response) {
+                                vm.answer = _.capitalize(response.data.answer)
+                            })
+                            .catch(function (error) {
+                                vm.answer = 'Error! Could not reach the API. ' + error
+                            })
+                    },
+                    // 这是我们为判定用户停止输入等待的毫秒数
+                    500
+                )
+            },
+            watch: {
+                // 如果 `question` 发生改变，这个函数就会运行
+                question: function (newQuestion) {
+                    this.answer = 'Waiting for you to stop typing...'
+                    this.getAnswer();
+                }
+            },
+            created: function () {
+                // `this` 指向 vm 实例
+                console.log('a is: ' + this.a)
+            }
+        });
+    </script>
+</body>
+
+</html>

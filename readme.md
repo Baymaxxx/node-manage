@@ -1,8 +1,8 @@
 ## 项目开发笔记
 ### 项目结构目录
    * node-manage
-        * admin => 管理端(vue)
-        * client => 客户端(angular4)
+        * vue => 客户端(vue)
+        * admin => 管理端(angular4)
         * server => 服务器(node.koa2)
         * app => 移动端(vue or react)
         * desktop => 桌面端(electron) 

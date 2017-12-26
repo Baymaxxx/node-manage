@@ -46,10 +46,9 @@ router
     })
   })
   .post('/users', async (ctx, next) => {
-    console.log(ctx);
     await new Promise((resolve, reject) => {
       DB.Users.update({
-        id: request.body.id
+        id: ctx.request.body.id
       }, ctx.request.body, (err, docs) => {
         if(err) {
           reject(err);

@@ -6,6 +6,8 @@ import {
   Validators,
   FormControl
 } from '@angular/forms';
+import {NzMessageService} from 'ng-zorro-antd';
+
 @Component({
   selector: 'app-user-register',
   templateUrl: './user-register.component.html',
@@ -14,7 +16,7 @@ import {
 export class UserRegisterComponent implements OnInit {
 
   validateForm: FormGroup;
-
+  isCameUsername: boolean;
   _submitForm() {
     for (const i in this.validateForm.controls) {
       if (this.validateForm.controls) {
@@ -32,8 +34,8 @@ export class UserRegisterComponent implements OnInit {
       .then(res => {
         console.log(res, 'res');
         if (res) {
-          console.log('此账号已存在！');
-        }else {
+          this.createMessage('error', '此账号已存在！');
+        } else {
           this.userService.registerUser(user)
             .then(() => {
               console.log(res);
@@ -43,8 +45,11 @@ export class UserRegisterComponent implements OnInit {
   }
 
   constructor(private fb: FormBuilder,
-    private userService: UserService
-  ) {
+    private userService: UserService,
+    private _message: NzMessageService
+  ) {}
+  createMessage = (type, text) => {
+    this._message.create(type, text);
   }
 
   updateConfirmValidator() {
@@ -53,7 +58,6 @@ export class UserRegisterComponent implements OnInit {
       this.validateForm.controls['checkPassword'].updateValueAndValidity();
     });
   }
-
   confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
       return { required: true };
