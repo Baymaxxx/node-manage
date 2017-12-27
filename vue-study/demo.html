@@ -15,7 +15,7 @@
 
 <body>
     <div id="app" v-bind:title="message">
-        <div :class="seen? 'active':'noActive'">look</div>
+        <div :class="seen? 'active':'noActive'" @click.right="message += 'vue' ">look</div>
         {{ message }} --- {{fullName}}
         <input type="text" v-model="message" :class="[message, fullName]">
         <button v-on:click="reverseMessage">翻转</button>
@@ -33,6 +33,12 @@
             <input v-model="question">
         </p>
         <p>{{ answer }}</p>
+        <ul>
+            <li v-for="item in obj">{{item}}</li>
+        </ul>
+        <label>
+            <input type="checkbox" id="checkbox" v-model.lazy="checked">{{checked}}</label>
+        <p v-bind.prop="checked"></p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
@@ -46,6 +52,7 @@
         var app = new Vue({
             el: '#app',
             data: {
+                checked: false,
                 message: 'hello vue!',
                 seen: true,
                 todos: [{
@@ -58,7 +65,12 @@
                 lastName: 'Bar',
                 fullName: 'Foo Bar',
                 question: '',
-                answer: 'I cannot give you an answer until you ask a question!'
+                answer: 'I cannot give you an answer until you ask a question!',
+                obj: {
+                    a: 'bb',
+                    b: 'cc',
+                    c: 'dd'
+                }
             },
             computed: {
                 reverseMessageC: function () {
@@ -103,8 +115,14 @@
             created: function () {
                 // `this` 指向 vm 实例
                 console.log('a is: ' + this.a)
+                this.obj['a'] = 'cc';
+                // Vue.set(this.obj, 'a', 'cc')
+                this.obj = Object.assign({}, this.obj, {
+                    d: 'ee'
+                })
             }
         });
+        app.firstName = 2;
     </script>
 </body>
 
