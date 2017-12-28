@@ -22,7 +22,7 @@ export default new Router({
       children: [
         {
           name: 'vue1',
-          path: 'vue1',
+          path: '/article/vue1',
           component: Vue1
         },
         {
@@ -32,7 +32,7 @@ export default new Router({
         },
         {
           name: 'vue3',
-          path: 'vue3',
+          path: '/article/vue3',
           component: Vue3
         }
       ]

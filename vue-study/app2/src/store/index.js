@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
-import status from './modules/status'
-import demo from './modules/demo'
+import * as actions from './actions'
+import countNum from './modules/countNum'
 
 Vue.use(Vuex)
 
@@ -10,8 +9,8 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
     modules: {
-        status,
-        demo
+        countNum,
+        actions
     },
     strict: debug
 })

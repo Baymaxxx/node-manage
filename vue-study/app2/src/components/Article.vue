@@ -1,11 +1,11 @@
 <!--  -->
 <template>
-  <div class="red">
+  <div>
       Article
-      <router-link to="vue1">vue1</router-link>
-      <router-link to="vue2">vue2</router-link>
-      <router-link to="vue3">vue3</router-link>
-  <router-view></router-view>      
+      <router-link to="/article/vue1">vue1</router-link>
+      <router-link to="/article/vue2">vue2</router-link>
+      <router-link to="/article/vue3">vue3</router-link>
+      <router-view></router-view>      
   </div>
 </template>
 
@@ -16,13 +16,8 @@ export default {
   },
   components: {},
   computed: {},
-  mounted: {},
   methods: {}
 };
 </script>
 <style scoped lang="scss">
-.red {
-  display: flex;
-  color: red;
-}
 </style>
