@@ -23,7 +23,7 @@ const mutations = {
 
 const actions = {
     loadProjectList: ({ commit }) => {
-        axios.get(API_PROXY + 'https://zhuanlan.zhihu.com/api/columns/NewsFlash/posts?limit=20')
+        axios.get(API_PROXY + 'https://zhuanlan.zhihu.com/api/columns/NewsFlash/posts?limit=1')
             .then((res) => {
                 console.log(res.data);
                 commit(types.SET_PROJECT_LIST, { list: res.data })

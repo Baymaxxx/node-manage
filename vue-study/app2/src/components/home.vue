@@ -1,21 +1,21 @@
 <!--  -->
 <template>
-  <div class="home">
-      <h1 class="l-ta--c">
-          Material Design
-      </h1>
-      <router-link to="/article">Article</router-link>
+  <div>
+    <tabbar></tabbar>
   </div>
 </template>
 
 <script>
+  import tabbar from './layout/tabbar'
 export default {
   data () {
     return {}
   },
-  components: {},
   computed: {},
-  methods: {}
+  methods: {},
+  components: {
+    tabbar
+  }
 }
 </script>
 <style lang='scss' scoped>
