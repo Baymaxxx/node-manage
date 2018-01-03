@@ -19,5 +19,11 @@ module.exports = {
     img: 'src',
     image: 'xlink:href'
   },
-  postcss: [require('postcss-px2rem')({ 'remUnit': 37.5, 'baseDpr': 2 })]
+  postcss: function (webpack) {
+    return [
+      require('postcss-import')({ addDependencyTo: webpack }),
+      require('precss'),
+      require('postcss-cssnext')({ 'autoprefixer': { 'browsers': 'ie >= 9, ...' } })
+    ]
+  }
 }
