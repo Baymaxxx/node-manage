@@ -1,3 +1,4 @@
+//背景渐变色
 @mixin gradient($from, $to) {
     /* Fallback for sad browsers */
     background-color: $to;
@@ -13,4 +14,12 @@
     background-image: -ms-linear-gradient($from, $to);
     /* W3C */
     background-image: linear-gradient($from, $to);
+}
+
+//
+// 文本超出显示省略号
+@mixin ell() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
