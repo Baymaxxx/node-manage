@@ -1,11 +1,12 @@
 <!-- 入口layout -->
 <template>
   <div class="layout-wrap">
+    <p class="tc" @click="changeDagger">{{dagger}}</p>
     <section class="menu">
       <Menu></Menu>
     </section>
     <section class="content-container">
-       <router-view></router-view>
+      <router-view></router-view>
     </section>
   </div>
 </template>
@@ -22,12 +23,21 @@ export default {
     Menu,
     Todo
   },
-  computed: {},
-  methods: {}
+  computed: {
+    dagger() {
+      return this.$store.getters.showDagger
+    }
+  },
+  methods: {
+    changeDagger() {
+      this.$store.dispatch('changeDagger')
+    }
+  }
 }
 </script>
 <style lang='scss' scoped>
 .layout-wrap {
+  color: #fff;
   position: absolute;
   top: 0;
   left: 0;

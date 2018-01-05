@@ -6,6 +6,7 @@
                 <div class="header-left fl clearfix">
                     <h3 class="todo-title fl">{{todo.title}}</h3>
                     <span class="mark-num fl">{{todo.count}}</span>
+                    <span class="mark-num fl">{{dagger}}</span>
                 </div>
                 <div class="header-right fr">
                     <i class="iconfont icon-suo"></i>
@@ -55,7 +56,11 @@ export default {
       this.init()
     }
   },
-  computed: {},
+  computed: {
+    dagger() {
+      return this.$store.getters.showDagger
+    }
+  },
   methods: {
     init() {
       const ID = this.$route.params.id
