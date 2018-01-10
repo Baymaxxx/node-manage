@@ -26,5 +26,6 @@ module.exports = {
     "space-before-function-paren": 0,//函数定义时括号前面要不要有空格
     "semi": 0,//语句强制分号结尾
     "no-useless-escape":"off", //不允许在字符串和正则表达式中使用无意义的换行符
+    'no-unused-expressions': 0,//短路求值和三目运算都允许
   }
 }

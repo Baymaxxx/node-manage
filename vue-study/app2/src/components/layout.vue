@@ -2,26 +2,40 @@
 <template>
   <div class="layout-wrap">
     <p class="tc" @click="changeDagger">{{dagger}}</p>
-    <section class="menu">
+    <section class="menu animated shake">
       <Menu></Menu>
+      <input type="text" v-focus>
     </section>
     <section class="content-container">
-      <router-view></router-view>
+      <transition name="fade">
+        <router-view v-if="!show"></router-view>
+      </transition>
     </section>
+    <button v-on:click="show = !show">
+      toggle
+    </button>
+    <transition name="fade">
+      <p v-if="show">hello</p>
+    </transition>
+    <Sidebar></Sidebar>
   </div>
 </template>
 
 <script>
 import Menu from './layout/menu'
 import Todo from './templates/todo'
+import Sidebar from './layout/sidebar'
 
 export default {
   data() {
-    return {}
+    return {
+      show: false
+    }
   },
   components: {
     Menu,
-    Todo
+    Todo,
+    Sidebar
   },
   computed: {
     dagger() {
@@ -56,6 +70,14 @@ export default {
     position: absolute;
     left: 400px;
     height: 100%;
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
   }
 }
 </style>

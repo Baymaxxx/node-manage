@@ -1,0 +1,1 @@
+* 根据eslint格式化代码：在vscode中，点击 文件>首选项>设置在搜索框中输入“eslint.autoFixOnSave”

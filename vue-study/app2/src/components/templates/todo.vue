@@ -1,34 +1,34 @@
 <!--  -->
 <template>
-    <div class="todo-wrap">
-        <div class="todo-header">
-            <div class="title-wrap">
-                <div class="header-left fl clearfix">
-                    <h3 class="todo-title fl">{{todo.title}}</h3>
-                    <span class="mark-num fl">{{todo.count}}</span>
-                    <span class="mark-num fl">{{dagger}}</span>
-                </div>
-                <div class="header-right fr">
-                    <i class="iconfont icon-suo"></i>
-                    <i class="iconfont icon-del"></i>
-                </div>
-            </div>
-            <div class="todo-input">
-                <i class="iconfont icon-c_add"></i>
-                <input type="text" placeholder="请输入">
-            </div>
+  <div class="todo-wrap">
+    <div class="todo-header">
+      <div class="title-wrap">
+        <div class="header-left fl clearfix">
+          <h3 class="todo-title fl">{{todo.title}}</h3>
+          <span class="mark-num fl">{{todo.count}}</span>
+          <span class="mark-num fl">{{dagger}}</span>
         </div>
-        <div class="todo-body">
-            <div v-for="item in items">
-                <todoItem :item='item'></todoItem>
-            </div>
+        <div class="header-right fr">
+          <i class="iconfont icon-suo"></i>
+          <i class="iconfont icon-del"></i>
         </div>
+      </div>
+      <div class="todo-input">
+        <i class="iconfont icon-c_add"></i>
+        <input type="text" placeholder="请输入">
+      </div>
     </div>
+    <div class="todo-body">
+      <div v-for="(item, index) in items" :key="index">
+        <todoItem :item='item'></todoItem>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import todoItem from './todoItem'
-import { getTodoById } from '../../assets/js/api'
+import { getTodoById } from '@/server/todo'
 
 export default {
   data() {

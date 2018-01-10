@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { getTodoList, addTodo } from '../../assets/js/api'
+import { getTodoList, addTodo } from '@/server/todo'
 export default {
   data() {
     return {

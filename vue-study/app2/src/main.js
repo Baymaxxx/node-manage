@@ -3,12 +3,17 @@
 import Vue from 'vue'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import 'animate.css/animate.css'
 import './assets/css/common.scss'
+
 // import 'lib-flexible/flexible.js'
 import * as toMoney from './filter/money.js'
+import './directive/focus'
 import App from './App'
 import router from './router'
-import store from './store';
+import store from './store'
+import axiosPlugin from './server'
+Vue.use(axiosPlugin)
 
 Vue.config.productionTip = false
 Vue.use(MintUI)
