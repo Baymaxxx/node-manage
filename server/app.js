@@ -11,10 +11,16 @@ const session = require('koa-session-minimal')
 const MongoStore = require('koa-generic-session-mongo')
 const path = require('path')
 const fs = require('fs'); // node自带的fs模块
-const server = require('http').Server(app);
+
+const server = require('http').Server(app.callback());
 const io = require('socket.io')(server);
+
+server.listen(process.env.PORT || 3000, function() {
+  console.log('listening');
+});
+
 const index = require('./routes/index')
-const users = require('./routes/users')
+const usersApi = require('./routes/users')
 
 // error handler
 onerror(app)
@@ -57,7 +63,7 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+app.use(usersApi.routes(), usersApi.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
@@ -70,14 +76,16 @@ app.on('error', (err, ctx) => {
 	*io.sockets 通知所有连接用户
 	*socket.broadcast 给除了自己以外的客户端广播消息
 */
+let users = [];
+
 io.on('connection', function (socket) {
   /*是否是新用户标识*/
-  var isNewPerson = true;
+  let isNewPerson = true;
   /*当前登录用户*/
-  var username = null;
+  let username = null;
   /*监听登录*/
   socket.on('login', function (data) {
-    for (var i = 0; i < users.length; i++) {
+    for (let i = 0; i < users.length; i++) {
       if (users[i].username === data.username) {
         isNewPerson = false;
         break;

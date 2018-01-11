@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="chat-page">
     <div class="login-wrap" v-if="!isCheckin">
       <div class="login-con">
         <h3>用户登录</h3>
@@ -40,66 +40,52 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
-      amount: 0, //聊天室总数人
-      uname: 'baymax', //定义用户名
+      amount: 0, //  聊天室总数人
+      uname: 'baymax', //  定义用户名
       inputMsg: '',
-      socket: null, //定义socket实例
+      socket: null, // 定义socket实例
       isCheckin: false,
-      msgList: [] //服务端返回的信息列表
+      msgList: [] // 服务端返回的信息列表
     }
   },
   mounted: function() {
-    var vm = this
-    /*建立socket连接，使用websocket协议，端口号是服务器端监听端口号*/
-
-    vm.socket = io('ws://localhost:3001')
+    let vm = this
+    /* 建立socket连接，使用websocket协议，端口号是服务器端监听端口号 */
+    vm.socket = io('ws://localhost:3000')
     console.log(vm.socket)
-    /*登录成功*/
+    /* 登录成功 */
     vm.socket.on('loginSuccess', function(data) {
       if (data.username === vm.uname) {
-        // vm.checkin(data)
+        //  vm.checkin(data)
         vm.isCheckin = true
       } else {
         alert('用户名不匹配，请重试')
       }
     })
 
-    /*登录失败*/
+    /* 登录失败 */
     vm.socket.on('loginFail', function() {
       alert('昵称重复')
     })
 
-    /*监听人数*/
+    /* 监听人数 */
     vm.socket.on('amountChange', function(data) {
       vm.amount = data
+      console.log(data)
     })
 
-    /*接收消息*/
+    /* 接收消息 */
     vm.socket.on('receiveMessage', function(data) {
       console.log('接收到服务端返回：', data)
       vm.msgList.push(data)
 
       window.scrollTo(0, document.getElementById('chat_con').scrollHeight)
 
-      //console.log('----',document.getElementById('chat_con').scrollHeight)
+      // console.log('----',document.getElementById('chat_con').scrollHeight)
     })
-
-    /*新人加入提示*/
-    // vm.socket.on('add',function(data){
-    //   console.log(data)
-
-    // })
-    /*退出群聊提示*/
-    // vm.socket.on('leave',function(name){
-    //   console.log('退出===',name)
-    //   if(name != null){
-
-    //   }
-    // })
   },
   filters: {
     formatDate: function(data) {
@@ -120,19 +106,19 @@ export default {
     }
   },
   methods: {
-    /*登录*/
+    /* 登录 */
     login: function() {
       var vm = this
 
       if (vm.uname) {
-        /*向服务端发送登录事件*/
+        /* 向服务端发送登录事件 */
         vm.socket.emit('login', { username: vm.uname })
       } else {
         alert('请输入昵称')
       }
     },
 
-    /*发送消息*/
+    /* 发送消息 */
     sendMessage: function() {
       var vm = this
 
@@ -167,7 +153,7 @@ li {
 a {
   color: #42b983;
 }
-/*公共样式*/
+/* 公共样式 */
 *{padding:0; margin:0;}
 html,body{width:100%;height: 100%;}
 .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
@@ -180,13 +166,14 @@ html,body{width:100%;height: 100%;}
 .rela{position: relative;}
 .abs{position:absolute;}
 h1{position: fixed; z-index:20; width: 100%; height:50px; line-height:50px; font-size:20px; left: 0; top: 0; background: #000; color: #fff;}
-/*登录界面*/
+/* 登录界面 */
+.chat-page{height:100vh;}
 .login-wrap{background:#e7e7e7;width:100%;height:100%; text-align:center;}
 .login-con{padding-top: 50px;}
 .login-con h3{margin-bottom: 20px;}
 .login-con input{width:60%; display:block; margin:0 auto; height: 40px; line-height: 40px; margin-bottom: 20px;}
 .login-con button{width:60%;display:block; margin:0 auto; height: 40px; line-height:40px; border:none; background:#459d36; color:#fff; border-radius:5px;}
-/*聊天界面*/
+/* 聊天界面 */
 .chat-wrap{width: 100%; height: 100%;overflow-y:auto; background:#e7e7e7; text-align:center;}
 .chat-con{padding: 50px 0 70px; background:#e7e7e7;}
 .chat-con p{display:inline-block; padding:5px 10px; background:#999;border-radius:5px; color:#fff; margin:5px 0;}
