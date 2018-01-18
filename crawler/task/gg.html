@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <script>
+        let printHello = (ready) => {
+            return new Promise((resolve, reject) => {
+                if (ready) {
+                    resolve('hello')
+                } else {
+                    reject('bye')
+                }
+            })
+        }
+
+        let printWrold = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('world')
+            }, 1000)
+        })
+
+
+        let printTan = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('!')
+            }, 3000)
+        })
+
+        printHello(true).then(message => {
+            return message
+        }).then(message => {
+            console.log(message + '!')
+        });
+
+        Promise.all([printWrold, printTan]).then((result) => {
+            console.log(result)
+        })
+    </script>
+</body>
+
+</html>
