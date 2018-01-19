@@ -1,6 +1,5 @@
 const Koa = require('koa')
 const app = new Koa()
-const views = require('koa-views')
 const json = require('koa-json')
 const cors = require('koa-cors')
 const onerror = require('koa-onerror')
@@ -19,8 +18,8 @@ server.listen(process.env.PORT || 3000, function() {
   console.log('listening');
 });
 
-const index = require('./routes/index')
-const usersApi = require('./routes/users')
+const routing = require('./routes')
+routing(app)
 
 // error handler
 onerror(app)
@@ -50,20 +49,13 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
-
 
 // logger
 app.use(async (ctx, next) => {
   const start = new Date()
   await next()
   const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
-
-// routes
-app.use(index.routes(), index.allowedMethods())
-app.use(usersApi.routes(), usersApi.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
@@ -98,9 +90,6 @@ io.on('connection', function (socket) {
       users.push({
         username: data.username
       })
-
-
-
       let resdata = {
         //username: data.username,	/*发送方用户名*/
         msgType: 0, 	/*信息类型：0为系统消息，1为客户端消息*/
@@ -169,8 +158,6 @@ io.on('connection', function (socket) {
       /*人数变更，广播给所有连接用户*/
       console.log('当前连接的用户为：', users);
       io.sockets.emit('amountChange', users.length);
-
-
     })
   })
 })

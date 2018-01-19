@@ -1,20 +1,15 @@
 const router = require('koa-router')()
 const usersRouter = require('./users')
+const bookRouter = require('./book')
 
-router.prefix('/api')
+const routes = [usersRouter, bookRouter]
 
-router.get('/', async (ctx, next) => {
-  ctx.body = 'hello api'
-})
-
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
-})
-
-router.get('/json', async (ctx, next) => {
-  ctx.body = {
-    title: 'koa2 json'
-  }
-})
-
-module.exports = router
+module.exports = (app) => {
+  routes.forEach((route) => {
+    app
+      .use(route.routes())
+      .use(route.allowedMethods({
+        throw: true
+      }))
+  })
+}
