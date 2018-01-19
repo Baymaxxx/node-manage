@@ -4,16 +4,6 @@
 
 关于静态资源不再提供补全 前端中自行补全 静态资源地址为: `http://statics.zhuishushenqi.com`
 
-# 部署
-
-`npm run dev`: 启动开发服务器
-
-`npm run build`: 通过babel打包
-
-`npm run setup`: 部署前步奏
-
-`npm run deploy`: 部署
-
 
 ## api接口
 
