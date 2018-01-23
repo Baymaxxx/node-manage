@@ -17,7 +17,7 @@
 #### 引入sass全局变量，mixin，function等
 ```
 先安装 npm install sass-resources-loader --save-dev，
-然后把scss: generateLoaders('sass')替换成如下代码
+然后把build/util中的scss: generateLoaders('sass')替换成如下代码
 scss: generateLoaders('sass').concat(
     {
         loader: 'sass-resources-loader',

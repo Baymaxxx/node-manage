@@ -19,10 +19,16 @@ exports.cssLoaders = function (options) {
       sourceMap: options.sourceMap
     }
   }
+  const px2remLoader = {
+    loader: 'px2rem-loader',
+    options: {
+      remUnit: 75
+    }
+  }
 
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
-    var loaders = [cssLoader]
+    var loaders = [cssLoader, px2remLoader]
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
@@ -50,7 +56,14 @@ exports.cssLoaders = function (options) {
     postcss: generateLoaders(),
     less: generateLoaders('less'),
     sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
+    scss: generateLoaders('sass').concat(
+      {
+          loader: 'sass-resources-loader',
+          options: {
+          resources: path.resolve(__dirname, '../src/assets/css/util.scss')
+          }
+      }
+    ),
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus')
   }

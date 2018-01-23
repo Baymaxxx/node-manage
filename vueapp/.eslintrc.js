@@ -24,5 +24,6 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     "space-before-function-paren": 0,//函数定义时括号前面要不要有空格
+    "indent": 0,//缩进风格
   }
 }
