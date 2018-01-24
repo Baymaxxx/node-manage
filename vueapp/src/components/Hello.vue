@@ -1,46 +1,17 @@
 <template>
-  <div class="hello">
-    <div>
-      <button @click="savePlayHistory(openProjects)">保存</button>
-      <button @click="delPlayHistory()">删除</button>
-    </div>
-    <template v-for="item in openProjects">
-      <div class="content" v-html="item.content" :key="item.title"></div>
-    </template>
-    <bottomNav></bottomNav>
+  <div class="hello hasbottomnav hasheader">
+    <router-view></router-view>
+    <BottomNav></BottomNav>
   </div>
 </template>
 
 <script>
-import { getInternetNews } from '@/api/news'
-import { mapGetters, mapActions } from 'vuex'
-import bottomNav from './layout/bottom-nav'
+import BottomNav from './layout/bottom-nav'
 
 export default {
   name: 'hello',
-  data() {
-    return {
-      openProjects: []
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'playHistory'
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'savePlayHistory',
-      'delPlayHistory'
-    ])
-  },
-  mounted() {
-    getInternetNews().then(res => {
-      this.openProjects = res
-    })
-  },
   components: {
-    bottomNav
+    BottomNav
   }
 }
 </script>

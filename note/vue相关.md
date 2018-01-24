@@ -26,4 +26,7 @@ scss: generateLoaders('sass').concat(
         }
     }
 ), 
+不转化：
+    border: 1px solid $color-border;/*px*/
+    border-radius: 6px; /*no*/
 ```

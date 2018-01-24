@@ -8,6 +8,16 @@ export function loadPlay() {
     return storage.get('PLAY_KEY', [])
 }
 
+export function loadUserSex() {
+    console.log(storage.get('USER_SEX', 'man'))
+    return storage.get('USER_SEX', 'man')
+}
+
+export function changeUserSexCa(usersex) {
+    storage.set('USER_SEX', usersex)
+    return usersex
+}
+
 export function savePlay(song) {
     return storage.set('PLAY_KEY', song)
 }

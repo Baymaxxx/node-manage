@@ -3,20 +3,29 @@
     <div class="bottom-nav">
         <ul>
             <li>
-                <i class="iconfont icon-suo"></i>
-                <p>书架</p>
+                <router-link to="/shelf">
+                    <i class="iconfont icon-shu"></i>
+                    <p>书架</p>
+                </router-link>
             </li>
             <li>
-                <i class="iconfont icon-suo"></i>
-                <p>精选</p>
+                <router-link to="/feature">
+                    <i class="iconfont icon-jingpin"></i>
+                    <p>精选</p>
+                </router-link>
             </li>
             <li>
-                <i class="iconfont icon-suo"></i>
-                <p>分类</p>
+
+                <router-link to="/category">
+                    <i class="iconfont icon-fenlei"></i>
+                    <p>分类</p>
+                </router-link>
             </li>
             <li>
-                <i class="iconfont icon-suo"></i>
-                <p>排行</p>
+                <router-link to="/rank">
+                    <i class="iconfont icon-paixingbang"></i>
+                    <p>排行</p>
+                </router-link>
             </li>
         </ul>
     </div>
@@ -43,9 +52,13 @@ export default {
     li {
       padding: 10px 0;
       flex: 1;
-      border-right: 1px solid #e2e2e2;
-      &:last-child{
-          border-right: none;
+      border-right: 1px solid $color-border;
+      border-top: 1px solid $color-border;
+      &:last-child {
+        border-right: none;
+      }
+      .router-link-active {
+          color: $color-header;
       }
     }
   }
