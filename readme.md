@@ -4,7 +4,7 @@
         * client => 客户端(vue)
         * admin => 管理端(angular4)
         * server => 服务器(node.koa2)
-        * app => 移动端(vue or react)
+        * app => 移动端(https://github.com/Baymaxxx/vue-book)
         * desktop => 桌面端(electron)
         * vue-study => vue相关模块学习及封装
 ### 所用工具及库
